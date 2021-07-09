@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import Content from "./sections/Content";
-import Result from "./sections/Result";
-import Welcome from "./sections/Welcome";
+import Content from "./sections/content/Content";
+import Result from "./sections/result/Result";
+import Welcome from "./sections/welcome/Welcome";
 
 const HomeStyled = styled.div`
   background-color: #fff;

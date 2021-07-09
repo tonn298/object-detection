@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import Upload from "./upload/Upload";
+import Upload from "../upload/Upload";
 
 const ContentStyled = styled.div`
-  background: #888;
+  > .holder {
+    background-color: #00ff00;
+  }
 `;
 
 const Content = () => {
@@ -18,6 +20,7 @@ const Content = () => {
     //   setIsShowUploadSection(false);
     //   return;
     // }
+
     setIsShowUploadSection(true);
   };
 
@@ -33,7 +36,7 @@ const Content = () => {
       {isShowUploadSection ? (
         <Upload method={uploadMethod} />
       ) : (
-        <div>Please select your method of uploading</div>
+        <div className="holder">Please select your method of uploading</div>
       )}
     </ContentStyled>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { useGlobalContext } from "../../context/GlobalProvider";
+import { useGlobalContext } from "../../../context/GlobalProvider";
 
 const ResultStyled = styled.div`
   background-color: #aaa;
