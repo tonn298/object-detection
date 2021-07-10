@@ -1,42 +1,64 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+import { useGlobalContext } from "../../../context/GlobalProvider";
 import Upload from "../upload/Upload";
+import Button from "../../../components/Button";
 
 const ContentStyled = styled.div`
-  > .holder {
-    background-color: #00ff00;
+  > .wrapper {
+    > .title {
+      margin-top: 30px;
+      font-size: 50px;
+      text-align: center;
+      font-weight: bold;
+    }
+    > .buttonContainer {
+      margin: 30px 0;
+      display: flex;
+      justify-content: space-around;
+      padding-bottom: 30px;
+      border-bottom: 1px solid ${(props) => props.theme.colors.darkGrey};
+    }
+  }
+  > .placeholder {
+    font-size: 28px;
+    text-align: center;
+    background-color: ${(props) => props.theme.colors.white};
+    margin: 20px;
   }
 `;
 
 const Content = () => {
-  const [uploadMethod, setUploadMethod] = useState(null);
-  const [isShowUploadSection, setIsShowUploadSection] = useState(false);
-
-  const handleSetMethod = (name) => {
-    setUploadMethod(name);
-
-    // if (name === null) {
-    //   setIsShowUploadSection(false);
-    //   return;
-    // }
-
-    setIsShowUploadSection(true);
-  };
+  const { method } = useGlobalContext();
 
   return (
     <ContentStyled>
-      <div className="title">
-        upload item by
-        <button onClick={() => handleSetMethod("upload")}>by upload</button>
-        <button onClick={() => handleSetMethod("webcam")}>by webcam</button>
-        {/* <button onClick={() => handleSetMethod(null)}>back</button> */}
+      <div className="wrapper">
+        <div className="title">
+          Detect objects in your Photo
+          <br />
+          <br />
+          By ...
+          <br />
+        </div>
+        <div className="buttonContainer">
+          <Button
+            text="Upload a Photo"
+            handleClick={() => method.setMethodForUpload("upload")}
+          />
+          <Button
+            text="Take a Photo"
+            handleClick={() => method.setMethodForUpload("webcam")}
+          />
+        </div>
       </div>
-      {/*  */}
-      {isShowUploadSection ? (
-        <Upload method={uploadMethod} />
+      {method.data === null ? (
+        <div className="placeholder">
+          Please select your method of upload above
+        </div>
       ) : (
-        <div className="holder">Please select your method of uploading</div>
+        <Upload />
       )}
     </ContentStyled>
   );

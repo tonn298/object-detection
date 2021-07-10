@@ -13,16 +13,30 @@ const GlobalProvider = (props) => {
   });
 
   const [apiResult, setApiResult] = useState({
-    data: null,
-    setData: (param) => {
+    uploadResult: null,
+    webCamResult: null,
+    setUploadResult: (param) => {
       const updateResultState = apiResult;
-      updateResultState.data = param;
+      updateResultState.uploadResult = param;
       setApiResult(() => ({ ...updateResultState }));
+    },
+    setWebcamResult: (param) => {
+      const updateResultState = apiResult;
+      updateResultState.webcamResult = param;
+      setApiResult(() => ({ ...updateResultState }));
+    },
+  });
+  const [method, setMethod] = useState({
+    data: null,
+    setMethodForUpload: (param) => {
+      const updateMethodState = method;
+      updateMethodState.data = param;
+      setMethod(() => ({ ...updateMethodState }));
     },
   });
 
   return (
-    <GlobalContext.Provider value={{ image, apiResult }}>
+    <GlobalContext.Provider value={{ image, apiResult, method }}>
       {props.children}
     </GlobalContext.Provider>
   );

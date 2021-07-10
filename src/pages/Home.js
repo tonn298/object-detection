@@ -3,19 +3,18 @@ import styled from "styled-components";
 
 import Content from "./sections/content/Content";
 import Result from "./sections/result/Result";
-import Welcome from "./sections/welcome/Welcome";
 
 const HomeStyled = styled.div`
   background-color: #fff;
-  > * {
-    margin: 20px;
-  }
+  display: flex;
+  flex-direction: column;
+
+  margin: 20px 40px;
 `;
 
 const Home = () => {
   return (
     <HomeStyled>
-      <Welcome />
       <Content />
       <Result />
     </HomeStyled>
