@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import { useGlobalContext } from "../../../context/GlobalProvider";
@@ -6,10 +6,12 @@ import { objectDetectionRequest } from "../../../services/requests";
 import Button from "../../../components/Button";
 
 const ByUploadStyled = styled.div`
-  background-color: ${(props) => props.theme.colors.white};
+  /* background-color: ${(props) => props.theme.colors.white}; */
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 32px;
+  border-bottom: 1px solid ${(props) => props.theme.colors.darkGrey};
   #upload {
     display: none;
   }
@@ -53,8 +55,7 @@ const ByUploadStyled = styled.div`
 `;
 
 const ByUpload = () => {
-  const { image, apiResult } = useGlobalContext();
-  const [uploadPreview, setUploadPreview] = useState(null);
+  const { image, apiResult, method } = useGlobalContext();
 
   const convertTo64base = (file) => {
     return new Promise((resolve, reject) => {
@@ -75,7 +76,8 @@ const ByUpload = () => {
   const handleUploadImage = async (e) => {
     const base64 = await convertTo64base(e.target.files[0]);
     image.setImageForQuery(base64);
-    setUploadPreview(URL.createObjectURL(e.target.files[0]));
+    method.setUploadPreview(URL.createObjectURL(e.target.files[0]));
+    apiResult.setUploadResult(null);
   };
 
   const detectPhoto = async () => {
@@ -84,27 +86,29 @@ const ByUpload = () => {
       return;
     }
     const apiResponse = await objectDetectionRequest(image.base64);
+    apiResult.setUploadResult(apiResponse);
   };
   return (
     <ByUploadStyled>
-      <label for="upload" className="uploadWrapper">
+      <label htmlFor="upload" className="uploadWrapper">
         <div className="uploadMessage">
-          {uploadPreview ? "upload a new one" : "Click here to upload an image"}
+          {method.uploadPreview
+            ? "upload a new one"
+            : "Click here to upload an image"}
         </div>
         <input type="file" id="upload" onChange={(e) => handleUploadImage(e)} />
       </label>
 
       <div className="previewImageWrapper">
         <p className="previewTitle">Preview here</p>
-        {/* <img className="previewImage" src="https://via.placeholder.com/500" /> */}
 
-        {!uploadPreview ? (
+        {!method.uploadPreview ? (
           <div className="previewMessage">
             {" "}
             no photo yet <br /> ...
           </div>
         ) : (
-          <img className="previewImage" src={uploadPreview} />
+          <img className="previewImage" src={method.uploadPreview} alt="" />
         )}
       </div>
       <div className="scanButton">

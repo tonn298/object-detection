@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import Webcam from "react-webcam";
 
@@ -8,10 +8,12 @@ import { objectDetectionRequest } from "../../../services/requests";
 import Button from "../../../components/Button";
 
 const WebcamStyled = styled.div`
-  background-color: ${(props) => props.theme.colors.white};
+  /* background-color: ${(props) => props.theme.colors.white}; */
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 32px;
+  border-bottom: 1px solid ${(props) => props.theme.colors.darkGrey};
   > .captureButtonWrapper {
     margin: 20px;
   }
@@ -39,21 +41,26 @@ const WebcamStyled = styled.div`
 `;
 
 const ByWebcam = () => {
-  const { image, apiResult } = useGlobalContext();
+  const { image, apiResult, method } = useGlobalContext();
   const webcamRef = useRef(null);
-  const [webcamPreview, setWebcamPreview] = useState(null);
 
   const handleTakePhoto = () => {
     const screenShot = webcamRef.current.getScreenshot();
     image.setImageForQuery(screenShot);
-    setWebcamPreview(screenShot);
+    method.setWebcamPreview(screenShot);
+    apiResult.setWebcamResult(null);
   };
 
   const detectPhoto = async () => {
-    console.log("yeet");
+    const dataPrep = prepBase64Data();
+    const apiResponse = await objectDetectionRequest(dataPrep);
+    apiResult.setWebcamResult(apiResponse);
+  };
+
+  const prepBase64Data = () => {
     const stringLength = image.base64.length;
-    const shouldSend = image.base64.slice(23, stringLength);
-    const test = await objectDetectionRequest(shouldSend);
+    const dataPrep = image.base64.slice(23, stringLength);
+    return dataPrep;
   };
 
   return (
@@ -70,13 +77,13 @@ const ByWebcam = () => {
 
       <div className="previewImageWrapper">
         <p className="previewTitle">Preview here</p>
-        {!webcamPreview ? (
+        {!method.webcamPreview ? (
           <div className="previewMessage">
             {" "}
             no photo yet <br /> ...
           </div>
         ) : (
-          <img className="previewImage" src={webcamPreview} />
+          <img className="previewImage" src={method.webcamPreview} alt="" />
         )}
       </div>
       <div className="scanButtonWrapper">

@@ -1,5 +1,7 @@
 import React, { useState, useContext } from "react";
 
+//TODOS: add logic on setDATA to ensure the param pass in gonna be what we needed (prevent clash)
+
 const GlobalContext = React.createContext();
 
 const GlobalProvider = (props) => {
@@ -14,11 +16,14 @@ const GlobalProvider = (props) => {
 
   const [apiResult, setApiResult] = useState({
     uploadResult: null,
-    webCamResult: null,
+    webcamResult: null,
     setUploadResult: (param) => {
       const updateResultState = apiResult;
       updateResultState.uploadResult = param;
+      // console.log("see inside", updateResultState);
       setApiResult(() => ({ ...updateResultState }));
+      // console.log("this should change", apiResult);
+      // it changes
     },
     setWebcamResult: (param) => {
       const updateResultState = apiResult;
@@ -26,11 +31,25 @@ const GlobalProvider = (props) => {
       setApiResult(() => ({ ...updateResultState }));
     },
   });
+
   const [method, setMethod] = useState({
-    data: null,
+    name: null,
+    uploadPreview: null,
+    webcamPreview: null,
+
     setMethodForUpload: (param) => {
       const updateMethodState = method;
-      updateMethodState.data = param;
+      updateMethodState.name = param;
+      setMethod(() => ({ ...updateMethodState }));
+    },
+    setUploadPreview: (param) => {
+      const updateMethodState = method;
+      updateMethodState.uploadPreview = param;
+      setMethod(() => ({ ...updateMethodState }));
+    },
+    setWebcamPreview: (param) => {
+      const updateMethodState = method;
+      updateMethodState.webcamPreview = param;
       setMethod(() => ({ ...updateMethodState }));
     },
   });

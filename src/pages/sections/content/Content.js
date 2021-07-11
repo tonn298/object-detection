@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import { useGlobalContext } from "../../../context/GlobalProvider";
@@ -24,8 +24,12 @@ const ContentStyled = styled.div`
   > .placeholder {
     font-size: 28px;
     text-align: center;
-    background-color: ${(props) => props.theme.colors.white};
-    margin: 20px;
+    /* background-color: ${(props) => props.theme.colors.white}; */
+    /* background-color: ${(props) => props.theme.colors.grey}; */
+
+    margin: 20px 0;
+    padding: 80px 0;
+    border-bottom: 1px solid ${(props) => props.theme.colors.darkGrey};
   }
 `;
 
@@ -37,7 +41,6 @@ const Content = () => {
       <div className="wrapper">
         <div className="title">
           Detect objects in your Photo
-          <br />
           <br />
           By ...
           <br />
@@ -53,7 +56,7 @@ const Content = () => {
           />
         </div>
       </div>
-      {method.data === null ? (
+      {method.name === null ? (
         <div className="placeholder">
           Please select your method of upload above
         </div>
