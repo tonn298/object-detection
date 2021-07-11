@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+// TODOS add loading when scan
 
 import { useGlobalContext } from "../../../context/GlobalProvider";
 import ByUpload from "./UploadByUpload";
