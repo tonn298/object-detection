@@ -5,7 +5,6 @@ import { useGlobalContext } from "../../../context/GlobalProvider";
 import ImageResult from "./ImageResult";
 
 const ResultStyled = styled.div`
-  /* background-color: ${(props) => props.theme.colors.white}; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,7 +16,7 @@ const ResultStyled = styled.div`
 `;
 
 const Result = () => {
-  const { apiResult, method } = useGlobalContext();
+  const { image, apiResult, method } = useGlobalContext();
 
   return (
     <ResultStyled>
@@ -34,12 +33,11 @@ const Result = () => {
                 <ImageResult
                   image={method.uploadPreview}
                   coordinate={apiResult.uploadResult}
+                  width={image.width}
+                  height={image.height}
                 />
               ) : (
-                <div className="placeholder">
-                  {" "}
-                  click scan now to view result
-                </div>
+                <div className="placeholder">click scan now to view result</div>
               )}
             </div>
           ) : (
@@ -50,10 +48,7 @@ const Result = () => {
                   coordinate={apiResult.webcamResult}
                 />
               ) : (
-                <div classname="placeholder">
-                  {" "}
-                  click scan now to view result
-                </div>
+                <div classname="placeholder">click scan now to view result</div>
               )}
             </div>
           )}

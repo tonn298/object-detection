@@ -8,7 +8,6 @@ import { objectDetectionRequest } from "../../../services/requests";
 import Button from "../../../components/Button";
 
 const WebcamStyled = styled.div`
-  /* background-color: ${(props) => props.theme.colors.white}; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,11 +23,15 @@ const WebcamStyled = styled.div`
     align-items: center;
 
     > .previewTitle {
-      font-size: 32px;
+      font-size: 52px;
+      font-weight: bold;
+      margin: 40px 0;
     }
     > .previewImage {
       min-height: 200px;
-      max-height: 500px;
+      box-shadow: 0 5px 50px #333;
+
+      /* max-height: 500px; */
     }
     .previewMessage {
       min-height: 200px;

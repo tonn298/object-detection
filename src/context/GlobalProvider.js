@@ -7,6 +7,8 @@ const GlobalContext = React.createContext();
 const GlobalProvider = (props) => {
   const [image, setImage] = useState({
     base64: null,
+    height: null,
+    width: null,
     setImageForQuery: (param) => {
       const updateImageState = image;
       updateImageState.base64 = param;
@@ -20,10 +22,7 @@ const GlobalProvider = (props) => {
     setUploadResult: (param) => {
       const updateResultState = apiResult;
       updateResultState.uploadResult = param;
-      // console.log("see inside", updateResultState);
       setApiResult(() => ({ ...updateResultState }));
-      // console.log("this should change", apiResult);
-      // it changes
     },
     setWebcamResult: (param) => {
       const updateResultState = apiResult;

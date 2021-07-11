@@ -6,7 +6,6 @@ import ByUpload from "./UploadByUpload";
 import ByWebcam from "./UploadByWebcam";
 
 const UploadStyled = styled.div`
-  /* background-color: ${(props) => props.theme.colors.white}; */
   display: flex;
   justify-content: center;
 `;

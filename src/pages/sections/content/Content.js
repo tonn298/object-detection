@@ -24,8 +24,6 @@ const ContentStyled = styled.div`
   > .placeholder {
     font-size: 28px;
     text-align: center;
-    /* background-color: ${(props) => props.theme.colors.white}; */
-    /* background-color: ${(props) => props.theme.colors.grey}; */
 
     margin: 20px 0;
     padding: 80px 0;

@@ -6,7 +6,6 @@ import { objectDetectionRequest } from "../../../services/requests";
 import Button from "../../../components/Button";
 
 const ByUploadStyled = styled.div`
-  /* background-color: ${(props) => props.theme.colors.white}; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,11 +37,15 @@ const ByUploadStyled = styled.div`
     align-items: center;
 
     > .previewTitle {
-      font-size: 32px;
+      font-size: 52px;
+      font-weight: bold;
+      margin: 40px 0;
     }
     > .previewImage {
       min-height: 200px;
-      max-height: 500px;
+      box-shadow: 0 5px 50px #333;
+
+      /* max-height: 500px; */
     }
     .previewMessage {
       min-height: 200px;
@@ -81,6 +84,9 @@ const ByUpload = () => {
   };
 
   const detectPhoto = async () => {
+    const imageProperty = document.getElementById("previewImage");
+    image.height = imageProperty.height;
+    image.width = imageProperty.width;
     if (image.base64 === null) {
       alert("please upload a photo first");
       return;
@@ -108,7 +114,12 @@ const ByUpload = () => {
             no photo yet <br /> ...
           </div>
         ) : (
-          <img className="previewImage" src={method.uploadPreview} alt="" />
+          <img
+            className="previewImage"
+            src={method.uploadPreview}
+            alt=""
+            id="previewImage"
+          />
         )}
       </div>
       <div className="scanButton">
