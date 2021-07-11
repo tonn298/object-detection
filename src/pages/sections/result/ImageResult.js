@@ -15,7 +15,6 @@ const ImageResultStyled = styled.div`
 
   > .container {
     display: inline-block;
-
     margin: 0 auto;
     background: black;
     position: relative;
@@ -34,6 +33,10 @@ const ImageResultStyled = styled.div`
 
 const ImageResult = ({ image, coordinate, width, height }) => {
   useEffect(() => {
+    if (coordinate.detected_objects === undefined) {
+      alert("notthing is in the picture");
+      return;
+    }
     drawFrame(coordinate);
   });
   const drawFrame = (coordinateArray) => {

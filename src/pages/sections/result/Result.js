@@ -46,6 +46,8 @@ const Result = () => {
                 <ImageResult
                   image={method.webcamPreview}
                   coordinate={apiResult.webcamResult}
+                  width={image.width}
+                  height={image.height}
                 />
               ) : (
                 <div classname="placeholder">click scan now to view result</div>

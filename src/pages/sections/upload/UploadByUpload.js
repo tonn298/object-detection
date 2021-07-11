@@ -84,13 +84,14 @@ const ByUpload = () => {
   };
 
   const detectPhoto = async () => {
-    const imageProperty = document.getElementById("previewImage");
-    image.height = imageProperty.height;
-    image.width = imageProperty.width;
     if (image.base64 === null) {
       alert("please upload a photo first");
       return;
     }
+    const imageProperty = document.getElementById("previewImage");
+    image.height = imageProperty.height;
+    image.width = imageProperty.width;
+
     const apiResponse = await objectDetectionRequest(image.base64);
     apiResult.setUploadResult(apiResponse);
   };

@@ -55,6 +55,14 @@ const ByWebcam = () => {
   };
 
   const detectPhoto = async () => {
+    if (image.base64 === null) {
+      alert("please take a photo first");
+      return;
+    }
+    const imageProperty = document.getElementById("previewImage");
+    image.height = imageProperty.height;
+    image.width = imageProperty.width;
+
     const dataPrep = prepBase64Data();
     const apiResponse = await objectDetectionRequest(dataPrep);
     apiResult.setWebcamResult(apiResponse);
@@ -86,7 +94,12 @@ const ByWebcam = () => {
             no photo yet <br /> ...
           </div>
         ) : (
-          <img className="previewImage" src={method.webcamPreview} alt="" />
+          <img
+            className="previewImage"
+            src={method.webcamPreview}
+            alt=""
+            id="previewImage"
+          />
         )}
       </div>
       <div className="scanButtonWrapper">
