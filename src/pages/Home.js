@@ -5,7 +5,6 @@ import Content from "./sections/content/Content";
 import Result from "./sections/result/Result";
 
 const HomeStyled = styled.div`
-  background-color: #fff;
   display: flex;
   flex-direction: column;
 

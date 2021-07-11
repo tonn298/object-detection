@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 
-//get size of an image
 const ImageResultStyled = styled.div`
   background-color: ${(props) => props.theme.colors.grey};
 
